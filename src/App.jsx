@@ -75,10 +75,10 @@ function App() {
         <h1>Biblioteca Mea de Jocuri</h1>
         <div className="game-grid">
           {games.map((game) => (
-            <div className="game-card" key={game.id}>
+            <div className="game-card" key={game._id}>
               <img src={game.background_image} alt={game.name} />
               <h3>{game.name}</h3>
-              <button onClick={() => handleDelete(game.id)}>Sterge</button>
+              <button onClick={() => handleDelete(game._id)}>Sterge</button>
               <button onClick={() => openModal(game)}>Deschide</button>
             </div>
           ))}
