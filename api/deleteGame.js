@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const db = client.db("cloud-computing-project");
     const collection = db.collection("games");
 
-    const objectId = new ObjectId(id);
+    const objectId = ObjectId(id);
 
     const result = await collection.deleteOne({ _id: objectId });
     if (result.deletedCount === 0) {
@@ -20,5 +20,7 @@ export default async function handler(req, res) {
     res.status(200).json({ message: "Jocul a fost sters cu succes." });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  } finally {
+    await client.close();
   }
 }
