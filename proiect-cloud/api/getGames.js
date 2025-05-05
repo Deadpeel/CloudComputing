@@ -4,15 +4,13 @@ const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
-
   try {
     await client.connect();
     const db = client.db("cloud-computing-project");
-    const collection = db.collection("test");
+    const collection = db.collection("games");
 
-    const result = await collection.insertOne(req.body);
-    res.status(200).json({ insertedId: result.insertedId });
+    const data = await collection.find({}).toArray();
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   } finally {
