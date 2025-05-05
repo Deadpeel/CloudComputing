@@ -4,13 +4,18 @@ const uri = process.env.MONGODB_URI;
 const RAWG_API_KEY = process.env.RAWG_API_KEY;
 const client = new MongoClient(uri);
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 export default async function handler(req, res) {
   try {
     await client.connect();
     const db = client.db("cloud-computing-project");
     const collection = db.collection("games");
 
+    const { slug } = req.body;
+
     const searchRes = await fetch(`https://api.rawg.io/api/games?search=${slug}&key=${RAWG_API_KEY}`);
+    console.log("Request URL:", `https://api.rawg.io/api/games?search=${slug}&key=${RAWG_API_KEY}`);
     const searchData = await searchRes.json();
 
     if (!searchData.results || searchData.results.length === 0) {
