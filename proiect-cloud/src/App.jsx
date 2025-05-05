@@ -7,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    fetch("/api/insert", {
+    fetch("/api/insertData", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: "Test", time: new Date() }),
@@ -15,7 +15,7 @@ function App() {
       .then(res => res.json())
       .then(result => console.log("Insert result:", result));
 
-    fetch("/api/get")
+    fetch("/api/getData")
       .then(res => res.json())
       .then(data => console.log("MongoDB data:", data));
   }, []);
