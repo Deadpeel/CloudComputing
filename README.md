@@ -118,7 +118,9 @@ Aplicația nu are sistem de autentificare – orice utilizator poate modifica li
 <h2 id="capturi-de-ecran">Capturi de Ecran</h2>
 <p>
 1. Pagina principală cu lista de jocuri și formularul de adăugare.<br>
+  ![Poza1](images/Poza1.jpg)
 2. Modala cu detalii afișată la apăsarea butonului “Deschide”.
+  ![Poza2](images/Poza2.jpg)
 </p>
 
 <h2 id="referinte">Referințe</h2>
