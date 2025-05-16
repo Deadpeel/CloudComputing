@@ -118,7 +118,8 @@ Aplicația nu are sistem de autentificare – orice utilizator poate modifica li
 <h2 id="capturi-de-ecran">Capturi de Ecran</h2>
 <p>
 1. Pagina principală cu lista de jocuri și formularul de adăugare.<br>
-  ![Poza1](https://github.com/user-attachments/assets/01d9c196-54ad-490a-9815-3bd30bf3e0fd)
+![Poza1](https://github.com/user-attachments/assets/43f6bbf9-bf19-42f6-b1f9-606de942ca1e)
+
 
 2. Modala cu detalii afișată la apăsarea butonului “Deschide”.
    ![Poza2](https://github.com/user-attachments/assets/31032ba6-f644-4940-8ac2-9c258adc9d2d)
