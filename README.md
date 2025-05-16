@@ -23,12 +23,13 @@
 
 <h2 id="introducere">Introducere</h2>
 <p>
-Utilizatorii care iubesc jocurile video nu au o modalitate ușoară de a-și organiza colecția de jocuri. Aplicația are ca scop construirea unei biblioteci personale de jocuri folosind doar titlul acestora, prin accesarea unui API extern care oferă detalii despre joc.
+Utilizatorii care iubesc jocurile video nu au o modalitate ușoară de a-și forma și organiza colecția de jocuri într-un mod care să le ofere o experiență personalizată și interactivă. Aplicația are ca obiectiv să permită utilizatorilor să își construiască biblioteca personală, folosind doar titlul jocului, fără a fi nevoie să introducă toate informațiile manual, prin accesarea unui API extern care le furnizează aceste detalii.
 </p>
 
 <h2 id="descriere-problema">Descriere Problema</h2>
 <p>
-Aplicația este construită cu React, Vercel și MongoDB și permite adăugarea jocurilor în bibliotecă prin nume. Detaliile sunt extrase automat folosind API-ul RAWG. Utilizatorii pot vizualiza și șterge jocurile din aplicație.
+Această aplicație funcționează ca o bibliotecă individuală pentru jocuri video, creată folosind React pentru partea de utilizator și Vercel plus MongoDB pentru partea de server. Utilizatorul are posibilitatea de a introduce numele jocurilor pentru a le adăuga, iar aplicația va contacta API-ul RAWG pentru a obține informații detaliate despre fiecare joc. Jocurile pot fi apoi văzute în interfața aplicației sau eliminate. 
+O problema pe care si eu am intampinat-o este sa nu pot sa recomand cuiva unui joc pentru ca nu imi amintesc pe moment ce am jucat. O buna metoda de a tine evidenta acestora si de a le organiza intr-o librarie este aplicatia prezentata. Cu o astfel de aplicatie fiecare persoana care vrea sa caute un joc nou pe care vrea sa il joace poate sa acceseze libraria si sa afle informatii despre jocurile dorite precum genurile acesuita, descriera sau rating-ul.
 </p>
 
 <h2 id="descriere-api">Descriere API</h2>
@@ -36,23 +37,22 @@ Aplicația este construită cu React, Vercel și MongoDB și permite adăugarea 
 <p>
 Folosit pentru stocarea persistentă a datelor. Trei rute principale:
 </p>
-<ul>
-  <li><strong>POST</strong> – adaugă un joc</li>
-  <li><strong>GET</strong> – returnează toate jocurile</li>
-  <li><strong>DELETE</strong> – șterge un joc</li>
-</ul>
+<p>
+Cu ajutorul acestui API pot sa stochez datele aplicatiei extern pentru a mentine persistenta. In cadrul bazei de date am o singura colectie, respectiv games, care se ocupa cu persistenta jocurilor adaugate de utilizator.
+Acest API are trei rute, prima fiind cea mentionata anterior de adaugare si este un POST. O alta r uta care este apelata de fiecare data cand pagina se incarca este ruta de GetGames care face un request catre baza de date si da fetch la toate jocurile pentru a le afisa pe pagina. O ultima ruta folosita este cea de DELETE care sterge un joc selectat din baza de date.
+</p>
 
 <h3>RAWG Video Games Database API</h3>
 <p>
-Furnizează informații detaliate despre jocuri, precum descriere, genuri, rating etc.
+Acest API este folosit pentru a face un fetch la providerul de informatii despre jocuri video pentru a gasii lucruri relevante despre un joc si a le aduce in aplicatie si a le afisa pentru ca utilizatorul sa isi formeze o parere despre joc.
 </p>
 
 <h2 id="flux-de-date">Flux de Date</h2>
 <p>
-1. Utilizatorul introduce numele jocului.<br>
-2. Aplicația caută informații în RAWG API.<br>
-3. Dacă există, se inserează în MongoDB și se afișează în interfață.<br>
-4. Utilizatorul poate șterge jocuri cu un buton dedicat.
+Utilizatorul introduce numele unui joc in caseta de inserare. Acest nume este trimis catre ruta de insertGame iar in aceasta ruta se face fetch-ul catre RAWG API si se cauta in baza lor de date un joc care sa corespunda numelui scris de catre utilizator.
+In caz ca nu exista nici un joc care sa corespunda numelui pus de utilizator o eroare va fi aratata user-ului si nimic nu o sa fie adaugat in baza de date. In caz contrar informatiile despre joc o sa fie aduse iar mai apoi o sa fie apelata baza de date Mongo si o sa fie inserate in baza de date pentru persistenta.
+Odata ce minim un joc este introdus in baza de date lista cu jocuri se va genera in pagina si vor aparea cartonase cu aceastea. Pentru a vizualiza informatiile despre joc se va apasa butonul din dreptul cartonasului cu “Deschide”.
+In caz ca utilizatorul vrea sa faca curat in biblioteca sa de jocuri poate sa stearga din acestea prin apasarea butonul “Sterge” din dreptul jocului selectat. Odata apasat se transmite id-ul jocului selectat ca si parametru la ruta deleteGame si se sterge din baza de date si dispare din lista.
 </p>
 
 <h3>Exemple CRUD</h3>
